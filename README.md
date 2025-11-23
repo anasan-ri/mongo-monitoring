@@ -178,11 +178,11 @@ you should see in target health
 ```
  service/monitor/observability/mongodb-metrics-app-sm/0
 ```
-![Prometheus](/images/prometheus-scrapping)
+![Prometheus](/images/prometheus-scrapping.png)
 
 If you execute mongodb_up in the query you should get data
 
-![Prometheus](/images/prometheus-graph)
+![Prometheus](/images/prometheus-graph.png)
 
 ### Port-forward to access Grafana
 Review that is running 
