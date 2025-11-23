@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongodb-metrics-app
+  namespace: observability
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongodb-metrics-app
+  template:
+    metadata:
+      labels:
+        app: mongodb-metrics-app
+    spec:
+      containers:
+        - name: app
+          image: anasan10/mongodb-metrics-app:latest
+          imagePullPolicy: Always
+          env:
+            - name: MONGO_URI
+              value: "mongodb://mongo-service:27017"
+            - name: POLL_INTERVAL
+              value: "10"
+          ports:
+            - containerPort: 8000
+              name: http

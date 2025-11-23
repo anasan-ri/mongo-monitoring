@@ -1,0 +1,23 @@
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environments
+venv/
+.env/
+*.env
+
+# VSCode
+.vscode/
+.idea/
+
+# MacOS
+.DS_Store
+
+# Byte-compiled / optimized / DLL files
+*.py[cod]
+
+# Local configs
+*.local

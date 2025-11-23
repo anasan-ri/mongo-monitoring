@@ -1,0 +1,48 @@
+{
+  "title": "MongoDB Metrics App",
+  "panels": [
+    {
+      "type": "timeseries",
+      "title": "MongoDB Up",
+      "targets": [
+        { "expr": "mongodb_up" }
+      ],
+      "gridPos": { "x": 0, "y": 0, "w": 12, "h": 6 }
+    },
+    {
+      "type": "timeseries",
+      "title": "Connections Current",
+      "targets": [
+        { "expr": "mongodb_connections_current" }
+      ],
+      "gridPos": { "x": 12, "y": 0, "w": 12, "h": 6 }
+    },
+    {
+      "type": "timeseries",
+      "title": "Collections per DB",
+      "targets": [
+        { "expr": "mongodb_db_collections_count" }
+      ],
+      "gridPos": { "x": 0, "y": 6, "w": 12, "h": 6 }
+    },
+    {
+      "type": "timeseries",
+      "title": "Documents per Collection",
+      "targets": [
+        { "expr": "mongodb_collection_documents_count" }
+      ],
+      "gridPos": { "x": 12, "y": 6, "w": 12, "h": 6 }
+    },
+    {
+      "type": "timeseries",
+      "title": "Query Duration p95",
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.95, sum(rate(mongodb_query_duration_seconds_bucket[5m])) by (le))"
+        }
+      ],
+      "gridPos": { "x": 0, "y": 12, "w": 24, "h": 6 }
+    }
+  ],
+  "schemaVersion": 36
+}

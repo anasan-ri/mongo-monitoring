@@ -1,0 +1,40 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: mongodb-alerts
+  namespace: observability
+  labels:
+    release: prometheus
+spec:
+  groups:
+  - name: mongodb.rules
+    rules:
+    - alert: MongoDBDown
+      expr: vector(1)
+      for: 3s
+      labels:
+        severity: critical
+        namespace: observability
+      annotations:
+        summary: "MongoDB unreachable (mongodb_up == 0)"
+        description: "La app no puede conectar a MongoDB. Revisar servicio/DB."
+
+    - alert: MongoConnectionsHigh
+      expr: mongodb_connections_current > 200
+      for: 2m
+      labels:
+        severity: warning
+        namespace: observability
+      annotations:
+        summary: "Altas conexiones a MongoDB"
+        description: "Conexiones actuales > 200."
+
+    - alert: MongoQueryLatencyHigh
+      expr: histogram_quantile(0.95, sum(rate(mongodb_query_duration_seconds_bucket[5m])) by (le)) > 1
+      for: 2m
+      labels:
+        severity: warning
+        namespace: observability
+      annotations:
+        summary: "Alta latencia en queries MongoDB (p95 > 1s)"
+        description: "Latencia P95 de consultas > 1s."

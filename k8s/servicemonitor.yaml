@@ -1,0 +1,18 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: mongodb-metrics-app-sm
+  namespace: observability
+  labels:
+    release: prometheus
+spec:
+  selector:
+    matchLabels:
+      app: mongodb-metrics-app
+  namespaceSelector:
+    matchNames:
+      - observability
+  endpoints:
+    - port: http
+      path: /metrics
+      interval: 15s

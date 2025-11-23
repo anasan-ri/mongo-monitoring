@@ -1,0 +1,21 @@
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: AlertmanagerConfig
+metadata:
+  name: mongodb-slack-alerts
+  namespace: observability
+spec:
+  route:
+    receiver: "slack"
+    groupBy: ["alertname"]
+    groupWait: 10s
+    groupInterval: 1m
+    repeatInterval: 1m
+  receivers:
+    - name: "slack"
+      slackConfigs:
+        - apiURL:
+            name: slack-webhook
+            key: webhook_url
+          channel: "#mongo"
+          sendResolved: true
+  inhibitRules: []
