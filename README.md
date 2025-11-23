@@ -12,6 +12,12 @@ This repository contains everything you need to deploy a MongoDB metrics exporte
 ## Notes
 - It was created using a WSL environment
 - A slack webhook needs to be configured in order to set the email alerts
+   - You need to webhook for the slack-secret.yaml in this section
+         ```
+         stringData:
+         webhook_url: "YOUR WEBHOOK HERE"
+         ```
+      After update save the file
 - Ensure you have Python installed on your system. You can verify this by running:
 ```bash
 python3 --version
